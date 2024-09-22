@@ -21,6 +21,9 @@ class log(Base):
     def __repr__(self) -> str:
         return f"Log(id={self.id!r}, ip={self.ip!r}, data={self.data!r}, status={self.status!r}, query={self.query!r}, user_agent={self.user_agent!r})"
 
+    def to_dict(self):
+        return { 'id': self.id, 'ip': self.ip, 'data': self.data.strftime('%Y-%m-%d %H:%M:%S'), 'status': self.status, 'query': self.query, 'user_agent': self.user_agent }
+
 # 91.132.20.33 
 # [11/May/2024:21:21:08 +0000] 
 # 200 

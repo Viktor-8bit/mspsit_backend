@@ -20,3 +20,6 @@ class Comment(Base):
 
     def __repr__(self) -> str:
         return f"Comment(id={self.id!r}, comment_text={self.comment_text!r})"
+
+    def to_dict(self):
+        return { "id": self.id, "comment_text": self.comment_text }
