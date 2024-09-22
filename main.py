@@ -3,7 +3,11 @@ from sqlalchemy import *
 from sqlalchemy.orm import *
 from flask import Flask
 
+<<<<<<< HEAD
 from model import *
+=======
+from bd_model import log, comment, Base
+>>>>>>> c699a37 (added model)
 
 
 
