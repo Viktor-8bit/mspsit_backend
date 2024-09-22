@@ -1,15 +1,15 @@
 
 from sqlalchemy import *
 from sqlalchemy.orm import *
+from flask import Flask
 
 from model import *
-
-from flask import Flask
 
 
 
 engine = create_engine("sqlite:///DataBase.db")
 session = Session(engine)
+Base.metadata.create_all(engine)
 
 
 app = Flask(__name__)
