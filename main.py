@@ -6,7 +6,7 @@ from flask import Flask, request
 
 from datetime import datetime
 from bd_model import log, comment, Base
-
+from flask_cors import CORS
 
 
 engine = create_engine("sqlite:///DataBase.db")
@@ -15,12 +15,10 @@ Base.metadata.create_all(engine)
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-
-# добавить коментарий к логу 
-@app.route("/api/add_comment_to_log/<int:log_id>")
-def add_comment_to_log(log_id):
-    return ''
+###########################
+# Log api
 
 # добавить лог записб 
 @app.route("/api/add_log", methods=['POST'])
@@ -50,4 +48,28 @@ def get_log_buId(log_id):
     return json.dumps(query.to_dict())
 
 # удалить лог ???
+@app.route("/api/delete_log_byId/<int:log_id>")
+def delete_log_byId(log_id):
+    try:
+        query = session.query(log).filter(log.id == log_id).first()
+        session.delete(query)
+        session.commit()
+        return "Ok"
+    except Exception:
+        print(Exception.with_traceback())
+        return "Failed"
 
+
+# End log api
+###########################
+
+###########################
+# Comment api
+
+# добавить коментарий к логу 
+@app.route("/api/add_comment_to_log/<int:log_id>")
+def add_comment_to_log(log_id):
+    return ''
+
+# End comment api
+###########################
